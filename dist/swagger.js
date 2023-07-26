@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllEndPoints = exports.getParamDetailsFromRequestBody = exports.getParamDetails = exports.getServerPath = exports.addTitlesToJsonSchemas = exports.isOa3Param = exports.getSuccessResponse = void 0;
-const json_schema_1 = require("./json-schema");
-const getRequestOptions_1 = require("./getRequestOptions");
+const module_interfaces_1 = require("./module.interfaces");
+const get_request_options_1 = __importDefault(require("./get-request-options"));
 const replaceOddChars = (str) => str.replace(/[^_a-zA-Z0-9]/g, '_');
 const getGQLTypeNameFromURL = (method, url) => {
     const fromUrl = replaceOddChars(url.replace(/[{}]+/g, ''));
@@ -121,7 +124,7 @@ const getParamDetailsFromRequestBody = (requestBody) => {
     }
     if (formData) {
         const formdataSchema = formData.schema;
-        if (!(0, json_schema_1.isObjectType)(formdataSchema)) {
+        if (!(0, module_interfaces_1.isObjectType)(formdataSchema)) {
             throw new Error(`RequestBody is formData, expected an object schema, got "${JSON.stringify(formdataSchema)}"`);
         }
         return Object.entries(formdataSchema.properties).map(([name, schema]) => ({
@@ -188,7 +191,7 @@ const getAllEndPoints = (schema) => {
                 description: operationObject.description,
                 response: (0, exports.getSuccessResponse)(operationObject.responses),
                 getRequestOptions: (parameterValues) => {
-                    return (0, getRequestOptions_1.getRequestOptions)({
+                    return (0, get_request_options_1.default)({
                         parameterDetails,
                         parameterValues,
                         baseUrl: serverPath,

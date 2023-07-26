@@ -1,41 +1,28 @@
 // TODO: fix no-param-reassign
 /* eslint-disable no-param-reassign */
 import {
-  GraphQLBoolean,
   GraphQLFieldConfigArgumentMap,
   GraphQLFieldConfigMap,
-  GraphQLFloat,
   GraphQLInputFieldConfigMap,
   GraphQLInputObjectType,
   GraphQLInputType,
-  GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLOutputType,
   GraphQLScalarType,
-  GraphQLString,
 } from 'graphql';
 import {
   isArrayType,
   isBodyType,
   isObjectType,
   JSONSchemaType,
-} from './json-schema';
-import { EndpointParam } from './getRequestOptions';
+  EndpointParam,
+  primitiveTypes,
+  GraphQLTypeMap,
+  GraphQLType
+} from './module.interfaces';
 
-export type GraphQLType = GraphQLOutputType | GraphQLInputType;
-
-export interface GraphQLTypeMap {
-  [typeName: string]: GraphQLType;
-}
-const primitiveTypes = {
-  string: GraphQLString,
-  date: GraphQLString,
-  integer: GraphQLInt,
-  number: GraphQLFloat,
-  boolean: GraphQLBoolean,
-};
 
 const jsonType = new GraphQLScalarType({
   name: 'JSON',

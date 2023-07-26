@@ -4,14 +4,7 @@ exports.mapParametersToFields = exports.createGraphQLType = exports.getTypeField
 // TODO: fix no-param-reassign
 /* eslint-disable no-param-reassign */
 const graphql_1 = require("graphql");
-const json_schema_1 = require("./json-schema");
-const primitiveTypes = {
-    string: graphql_1.GraphQLString,
-    date: graphql_1.GraphQLString,
-    integer: graphql_1.GraphQLInt,
-    number: graphql_1.GraphQLFloat,
-    boolean: graphql_1.GraphQLBoolean,
-};
+const module_interfaces_1 = require("./module.interfaces");
 const jsonType = new graphql_1.GraphQLScalarType({
     name: 'JSON',
     serialize(value) {
@@ -20,18 +13,18 @@ const jsonType = new graphql_1.GraphQLScalarType({
 });
 function getPrimitiveType(format, type) {
     const primitiveTypeName = format === 'int64' ? 'string' : type;
-    const primitiveType = primitiveTypes[primitiveTypeName];
+    const primitiveType = module_interfaces_1.primitiveTypes[primitiveTypeName];
     if (!primitiveType) {
-        return primitiveTypes.string;
+        return module_interfaces_1.primitiveTypes.string;
     }
     return primitiveType;
 }
 const jsonSchemaTypeToGraphQL = (title, jsonSchema, propertyName, isInputType, gqlTypes, required) => {
     const baseType = (() => {
-        if ((0, json_schema_1.isBodyType)(jsonSchema)) {
+        if ((0, module_interfaces_1.isBodyType)(jsonSchema)) {
             return (0, exports.jsonSchemaTypeToGraphQL)(title, jsonSchema.schema, propertyName, isInputType, gqlTypes, required);
         }
-        if ((0, json_schema_1.isObjectType)(jsonSchema) || (0, json_schema_1.isArrayType)(jsonSchema)) {
+        if ((0, module_interfaces_1.isObjectType)(jsonSchema) || (0, module_interfaces_1.isArrayType)(jsonSchema)) {
             // eslint-disable-next-line no-use-before-define,@typescript-eslint/no-use-before-define
             return (0, exports.createGraphQLType)(jsonSchema, `${title}_${propertyName}`, isInputType, gqlTypes);
         }
@@ -57,14 +50,14 @@ const makeValidName = (name) => name.replace(/[^_0-9A-Za-z]/g, '_');
 const getTypeFields = (jsonSchema, title, isInputType, gqlTypes) => {
     return () => {
         const properties = {};
-        if ((0, json_schema_1.isObjectType)(jsonSchema)) {
+        if ((0, module_interfaces_1.isObjectType)(jsonSchema)) {
             Object.keys(jsonSchema.properties).forEach(key => {
                 properties[makeValidName(key)] = jsonSchema.properties[key];
             });
         }
         return Object.keys(properties).reduce((prev, propertyName) => {
             const propertySchema = properties[propertyName];
-            const type = (0, exports.jsonSchemaTypeToGraphQL)(title, propertySchema, propertyName, isInputType, gqlTypes, !!((0, json_schema_1.isObjectType)(jsonSchema) &&
+            const type = (0, exports.jsonSchemaTypeToGraphQL)(title, propertySchema, propertyName, isInputType, gqlTypes, !!((0, module_interfaces_1.isObjectType)(jsonSchema) &&
                 jsonSchema.required &&
                 jsonSchema.required.includes(propertyName)));
             return Object.assign(Object.assign({}, prev), { [propertyName]: {
@@ -96,11 +89,11 @@ const createGraphQLType = (jsonSchema, title, isInputType, gqlTypes) => {
     else if (!jsonSchema.title) {
         jsonSchema = Object.assign(Object.assign({}, jsonSchema), { title });
     }
-    if ((0, json_schema_1.isArrayType)(jsonSchema)) {
+    if ((0, module_interfaces_1.isArrayType)(jsonSchema)) {
         const itemsSchema = Array.isArray(jsonSchema.items)
             ? jsonSchema.items[0]
             : jsonSchema.items;
-        if ((0, json_schema_1.isObjectType)(itemsSchema) || (0, json_schema_1.isArrayType)(itemsSchema)) {
+        if ((0, module_interfaces_1.isObjectType)(itemsSchema) || (0, module_interfaces_1.isArrayType)(itemsSchema)) {
             return new graphql_1.GraphQLList(new graphql_1.GraphQLNonNull((0, exports.createGraphQLType)(itemsSchema, `${title}_items`, isInputType, gqlTypes)));
         }
         if (itemsSchema.type === 'file') {
@@ -114,7 +107,7 @@ const createGraphQLType = (jsonSchema, title, isInputType, gqlTypes) => {
         const primitiveType = getPrimitiveType(itemsSchema.format, itemsSchema.type);
         return new graphql_1.GraphQLList(new graphql_1.GraphQLNonNull(primitiveType));
     }
-    if ((0, json_schema_1.isObjectType)(jsonSchema) &&
+    if ((0, module_interfaces_1.isObjectType)(jsonSchema) &&
         !Object.keys(jsonSchema.properties || {}).length) {
         return jsonType;
     }

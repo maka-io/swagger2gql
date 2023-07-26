@@ -19,7 +19,7 @@ require('yargs')
         const schema = await swaggerToGraphql.createSchema({
           swaggerSchema,
         });
-        console.log(graphql.printSchema(schema.schema));
+        console.log(schema);
       } catch (err) {
         console.error(err);
         process.exit(1);

@@ -1,46 +1,13 @@
-import { JSONSchemaType } from './json-schema';
+import { RequestOptionsInput, RequestOptions } from './module.interfaces';
 
-export interface EndpointParam {
-  required: boolean;
-  type: 'header' | 'query' | 'formData' | 'path' | 'body';
-  name: string;
-  swaggerName: string;
-  jsonSchema: JSONSchemaType;
-}
-
-export interface RequestOptionsInput {
-  method: string;
-  baseUrl: string | undefined;
-  path: string;
-  parameterDetails: EndpointParam[];
-  parameterValues: {
-    [key: string]: any;
-  };
-  formData?: boolean;
-}
-
-export interface RequestOptions {
-  baseUrl?: string;
-  path: string;
-  method: string;
-  headers?: {
-    [key: string]: string;
-  };
-  query?: {
-    [key: string]: string | string[];
-  };
-  body?: any;
-  bodyType: 'json' | 'formData';
-}
-
-export function getRequestOptions({
+const getRequestOptions = ({
   method,
   baseUrl,
   path,
   parameterDetails,
   parameterValues,
   formData = false,
-}: RequestOptionsInput): RequestOptions {
+}: RequestOptionsInput): RequestOptions => {
   const result: RequestOptions = {
     method,
     baseUrl,
@@ -87,4 +54,6 @@ export function getRequestOptions({
   });
 
   return result;
-}
+};
+
+export default getRequestOptions;

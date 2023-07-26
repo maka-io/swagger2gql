@@ -1,6 +1,6 @@
 "use strict";
-exports.getRequestOptions = void 0;
-function getRequestOptions({ method, baseUrl, path, parameterDetails, parameterValues, formData = false, }) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const getRequestOptions = ({ method, baseUrl, path, parameterDetails, parameterValues, formData = false, }) => {
     const result = {
         method,
         baseUrl,
@@ -40,5 +40,5 @@ function getRequestOptions({ method, baseUrl, path, parameterDetails, parameterV
         }
     });
     return result;
-}
-exports.getRequestOptions = getRequestOptions;
+};
+exports.default = getRequestOptions;
