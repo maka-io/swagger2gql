@@ -3,7 +3,7 @@ var swaggerToGraphql = require('../dist');
 var graphql = require('graphql');
 
 require('yargs')
-  .scriptName('swagger-to-graphql')
+  .scriptName('s2gql')
   .command(
     '$0',
     'Convert swagger schema to graphql schema',

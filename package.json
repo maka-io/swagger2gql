@@ -1,5 +1,5 @@
 {
-  "name": "@maka/swagger-to-graphql-federate",
+  "name": "@maka/swagger-to-graphql",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
