@@ -16,7 +16,7 @@ const graphql_1 = require("graphql");
 const json_schema_ref_parser_1 = __importDefault(require("@apidevtools/json-schema-ref-parser"));
 const swagger_1 = require("./swagger");
 const typeMap_1 = require("./typeMap");
-const apollo_server_1 = require("apollo-server");
+const graphql_tag_1 = __importDefault(require("graphql-tag"));
 function createResolvers(fieldConfigMap) {
     const resolvers = {};
     for (const fieldName in fieldConfigMap) {
@@ -34,7 +34,7 @@ function createResolvers(fieldConfigMap) {
     return resolvers;
 }
 const schemaToTypeDefs = (schema) => {
-    return (0, apollo_server_1.gql) `${(0, graphql_1.printSchema)(schema)}`;
+    return (0, graphql_tag_1.default) `${(0, graphql_1.printSchema)(schema)}`;
 };
 function parseResponse(response, returnType) {
     const nullableType = returnType instanceof graphql_1.GraphQLNonNull ? returnType.ofType : returnType;

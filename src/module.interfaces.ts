@@ -3,7 +3,7 @@ import { GraphQLObjectType,
   GraphQLInputType, GraphQLInt, GraphQLFloat, GraphQLBoolean, GraphQLSchema, DocumentNode,
   GraphQLResolveInfo
 } from 'graphql';
-import { JSONSchema } from "@apidevtools/json-schema-ref-parser"
+import JSONSchema from "@apidevtools/json-schema-ref-parser"
 
 export type GraphQLType = GraphQLOutputType | GraphQLInputType;
 

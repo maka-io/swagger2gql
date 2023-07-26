@@ -28,7 +28,7 @@ import {
   jsonSchemaTypeToGraphQL,
   mapParametersToFields,
 } from './typeMap';
-import { gql } from 'apollo-server';
+import gql from 'graphql-tag';
 
 function createResolvers<TSource, TContext>(
   fieldConfigMap: GraphQLFieldConfigMap<TSource, TContext>
