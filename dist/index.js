@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSchema = exports.parseResponse = void 0;
 const graphql_1 = require("graphql");
-const json_schema_ref_parser_1 = require("json-schema-ref-parser");
+const json_schema_ref_parser_1 = __importDefault(require("@apidevtools/json-schema-ref-parser"));
 const swagger_1 = require("./swagger");
 const typeMap_1 = require("./typeMap");
 const apollo_server_1 = require("apollo-server");
@@ -106,7 +109,7 @@ const schemaFromEndpoints = (endpoints, options) => {
     };
 };
 const createSchema = (options) => __awaiter(void 0, void 0, void 0, function* () {
-    const schemaWithoutReferences = (yield (0, json_schema_ref_parser_1.dereference)(options.swaggerSchema));
+    const schemaWithoutReferences = (yield json_schema_ref_parser_1.default.dereference(options.swaggerSchema));
     const swaggerSchema = (0, swagger_1.addTitlesToJsonSchemas)(schemaWithoutReferences);
     const endpoints = (0, swagger_1.getAllEndPoints)(swaggerSchema);
     const schema = schemaFromEndpoints(endpoints, options);

@@ -10,8 +10,7 @@ import {
   printSchema,
   DocumentNode
 } from 'graphql';
-import * as refParser from 'json-schema-ref-parser';
-import { dereference, JSONSchema } from 'json-schema-ref-parser';
+import $RefParser, { JSONSchema } from "@apidevtools/json-schema-ref-parser"
 import {
   addTitlesToJsonSchemas,
   Endpoint,
@@ -200,7 +199,7 @@ export interface Options<TContext> {
 export const createSchema = async <TContext>(
   options: Options<TContext>,
 ): Promise<any> => {
-  const schemaWithoutReferences = (await dereference(
+  const schemaWithoutReferences = (await $RefParser.dereference(
     options.swaggerSchema,
   )) as SwaggerSchema;
   const swaggerSchema = addTitlesToJsonSchemas(schemaWithoutReferences);

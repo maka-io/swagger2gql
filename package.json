@@ -2,10 +2,13 @@
   "name": "@maka/swagger-to-graphql-federate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "tsc -w"
+    "build": "tsc -w",
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "npm run lint -- --fix"
   },
+  "bin": "./bin/swagger-to-graphql",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,6 +16,9 @@
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.45.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {

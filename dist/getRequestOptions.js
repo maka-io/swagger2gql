@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRequestOptions = void 0;
 function getRequestOptions({ method, baseUrl, path, parameterDetails, parameterValues, formData = false, }) {
     const result = {
