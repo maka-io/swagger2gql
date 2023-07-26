@@ -1,6 +1,6 @@
 {
   "name": "@maka/swagger2gql",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -8,11 +8,15 @@
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "npm run lint -- --fix"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maka-io/swagger2gql"
+  },
   "bin": {
     "swagger2gql": "./bin/s2gql"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["swagger"],
+  "author": "mjmcee@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.22.9",
