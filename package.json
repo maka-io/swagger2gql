@@ -1,5 +1,5 @@
 {
-  "name": "@maka/s2gql",
+  "name": "@maka/swagger2gql",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
