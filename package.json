@@ -1,8 +1,8 @@
 {
   "name": "@maka/swagger2gql",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -w",
     "lint": "eslint --ext .js,.ts .",
